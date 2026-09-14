@@ -1,0 +1,62 @@
+# Local Python and Conda environments
+.venv/
+.conda/
+.python-version
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Locally acquired tools and upstream source
+.tools/
+.vendor/
+
+# Credentials and machine-local settings
+.env
+.env.*
+!.env.example
+.cdsapirc
+*.key
+*.pem
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and workflow intermediates
+logs/
+benchmarks/
+tmp/
+.cache/
+snakemake/
+.snakemake/
+*.log
+
+# Downloaded and generated data
+data/downloads/
+data/work/
+data/generated/
+data/raw/
+artifacts/
+*.nc
+*.nc4
+*.grib
+*.grib2
+*.pbf
+*.gpkg
+*.tif
+*.tiff
+*.zip
+*.7z
+*.part
+
+# Conda lock tooling caches
+.conda-lock/
+pixi.lock
+
+# Keep scientific reports and their reasonably sized figures under version control.

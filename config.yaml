@@ -1,0 +1,75 @@
+project:
+  name: EcuadorElectricGridData
+  status: documentation-only
+  primary_platform: win-64
+  shell: powershell
+  license: MIT
+
+consumer:
+  repository: https://github.com/Fernando3161/EcuadorElectricGrid.git
+  evidence_branch: scenarios
+  evidence_commit: b57b5dc54cee1ad7a56f1c2da78db3cb6a3bce98
+  artifacts:
+    base_network:
+      producer_path: networks/base.nc
+      export_path: data/raw/networks/base.nc
+    solar_profile:
+      producer_path: resources/renewable_profiles/profile_solar.nc
+      export_path: data/raw/cutouts/solar.nc
+    onwind_profile:
+      producer_path: resources/renewable_profiles/profile_onwind.nc
+      export_path: data/raw/cutouts/onwind.nc
+  excluded_outputs:
+    - data/processed/networks/ec_network_2022.nc
+    - data/processed/networks/network_base_filled.nc
+
+upstream:
+  repository: https://github.com/pypsa-meets-earth/pypsa-earth.git
+  candidate_commit: 5a44728fb82a4e41adcd977765fb1df7a5bc4e5e
+  pinned_commit: null
+  config_version: 0.7.0
+  candidate_status: pending-phase-01-verification
+  checkout_dir: .vendor/pypsa-earth
+  effective_config: config/legacy_pypsa_earth.yaml
+  south_america_bundle:
+    name: bundle_cutouts_southamerica
+    historical_output: cutouts/cutout-2013-era5.nc
+    historical_size_note: approximately-18-GB
+    source_status: verify-in-phase-01
+
+environment:
+  prefix: .venv
+  specification: environment.yml
+  lock_file: environment-win-64.lock.yml
+  lock_status: create-after-successful-phase-02-solve
+  python_historical: 3.11.14
+
+execution:
+  heavy_commands_require_explicit_user_action: true
+  confirm_before_overwrite: true
+  atomic_output_write: true
+  cache_downloads: true
+  verify_cached_downloads: true
+  atlite_processes: 4
+  progress_reporting: true
+  eta_reporting: best-effort
+
+historical_weather:
+  weather_year: 2013
+  module: era5
+  resolution:
+    dx: 0.3
+    dy: 0.3
+  legacy_snapshot_start: "2013-01-01"
+  legacy_snapshot_end: "2013-01-15"
+  expected_consumer_index_start: "2013-01-01 00:00"
+  expected_consumer_index_end: "2013-12-31 23:00"
+  expected_consumer_steps: 8760
+  mismatch_status: unresolved-phase-01-blocker
+
+reporting:
+  directory: reports
+  figures_directory: reports/figures
+  checksum_algorithm: sha256
+  manifest_path: data/provenance/manifest.json
+  checksum_path: data/provenance/checksums.sha256

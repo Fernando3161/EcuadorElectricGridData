@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software or its generated artifacts, please cite the archived release and the upstream data sources listed in the release metadata."
+title: "EcuadorElectricGridData"
+type: software
+authors:
+  - family-names: "Peñaherrera V."
+    given-names: "Fernando"
+    name-suffix: "Dr.-Ing."
+repository-code: "https://github.com/Fernando3161/EcuadorElectricGridData"
+license: MIT
+version: "0.0.0"
+date-released: "2026-09-14"

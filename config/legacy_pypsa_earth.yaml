@@ -1,0 +1,103 @@
+# Historical override copied from EcuadorElectricGrid/scenarios at commit
+# b57b5dc54cee1ad7a56f1c2da78db3cb6a3bce98.
+# Preserve as evidence. Do not silently correct it; Phase 01 must derive and record
+# the effective runnable configuration.
+
+tutorial: false
+
+countries: ["EC"]
+
+logging:
+  level: INFO
+  format: "%(levelname)s:%(name)s:%(message)s"
+
+results_dir: results/
+summary_dir: results/
+
+enable:
+  retrieve_databundle: false
+  retrieve_databundle_sector: false
+  retrieve_cost_data: false
+  download_osm_data: false
+  build_natura_raster: false
+  progress_bar: false
+
+load_options:
+  ssp: "ssp2-2.6"
+  weather_year: 2013
+  prediction_year: 2030
+  scale: 1
+
+crs:
+  geo_crs: EPSG:4326
+  distance_crs: EPSG:3857
+  area_crs: ESRI:54009
+
+clean_osm_data_options:
+  threshold_voltage: 35000
+
+base_network:
+  min_voltage_substation_offshore: 35000
+  min_voltage_rebase_voltage: 35000
+
+electricity:
+  co2limit: 1.487e+9
+  co2base: 1.487e+9
+  automatic_emission: true
+  conventional_carriers:
+    - nuclear
+    - coal
+    - lignite
+    - oil
+    - OCGT
+    - CCGT
+    - biomass
+    - geothermal
+  atlite:
+    nprocesses: 4
+    cutouts:
+      cutout-2013-era5-tutorial:
+        module: era5
+        dx: 0.3
+        dy: 0.3
+  snapshots:
+    start: "2013-01-01"
+    end: "2013-01-15"
+  renewable_carriers:
+    - solar
+    - onwind
+    - offwind-ac
+    - offwind-dc
+    - hydro
+  estimate_renewable_capacities:
+    stats: "irena"
+    year: 2021
+    p_nom_min: 1
+    p_nom_max: false
+    technology_mapping:
+      Offshore: [offwind-ac, offwind-dc]
+      Onshore: [onwind]
+      PV: [solar]
+  powerplants_filter: (DateOut >= 2022 or DateOut != DateOut)
+  custom_powerplants: merge
+
+lines:
+  ac_types:
+    132.: "243-AL1/39-ST1A 20.0"
+    220.: "Al/St 240/40 2-bundle 220.0"
+    300.: "Al/St 240/40 3-bundle 300.0"
+    380.: "Al/St 240/40 4-bundle 380.0"
+    500.: "Al/St 240/40 4-bundle 380.0"
+    750.: "Al/St 560/50 4-bundle 750.0"
+  dc_types:
+    500.: "HVDC XLPE 1000"
+  s_max_pu: 0.7
+  s_nom_max: .inf
+  s_nom_max_min: -.inf
+  length_factor: 1.25
+  under_construction: "zero"
+
+solving:
+  solver:
+    name: highs
+    options: highs-default

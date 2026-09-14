@@ -1,0 +1,66 @@
+name: ecuador-electric-grid-data
+
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - python >=3.10,<3.12
+  - pip
+  - pypsa >=0.25,<=0.30.3
+  - atlite >=0.4.1
+  - dask
+  - powerplantmatching >=0.5.19
+  - earth-osm >=2.3.post1
+  - xlrd
+  - openpyxl
+  - seaborn
+  - snakemake-minimal <8
+  - memory_profiler
+  - ruamel.yaml <=0.17.26
+  - pytables
+  - pyscipopt
+  - lxml
+  - numpy <2
+  - pandas
+  - geopandas >=1
+  - fiona >=1.10
+  - xarray >=2023.11.0,<=2025.01.2
+  - netcdf4
+  - libgdal-netcdf
+  - networkx
+  - scipy <1.16
+  - pydoe2
+  - shapely !=2.0.4
+  - pre-commit
+  - matplotlib
+  - reverse-geocode
+  - country_converter
+  - pyogrio
+  - numba
+  - py7zr
+  - tsam >=1.1.0
+  - fake-useragent
+  - chaospy
+  - geopy
+  - tqdm
+  - pytz
+  - cartopy
+  - rasterio
+  - rioxarray
+  - geoviews
+  - hvplot
+  - graphviz
+  - contextily
+  - glpk
+  - highs
+  - rich
+  - plotly =6.3.1
+  - pip:
+      - currencyconverter
+      - googledrivedownloader >=1.1
+
+# This specification reconstructs the historical dependency constraints and fixes
+# two obvious transcription defects in the archived environment: `ploty` -> `plotly`
+# and an empty dependency entry. It is provisional until Phase 01/02 resolves and
+# locks it on win-64. PyPSA-Earth itself is used from a pinned source checkout.
